@@ -11,15 +11,15 @@
 {
     "access_key": "xxxxxx",
     "secret_key": "xxxxxx",
-    "bucket_name": "xxxxxx",
-    "domain": "xxxxxx"
+    "bucket_name": "xxxxxx"
 }
 ```
 
 ### 例子
 
 ```shell
-   $ qiniu_upload -c ~/config.json -s ~/directory_need_to_upload
+   $ qiniu_upload -c ~/config.json -s ~/directory_need_to_upload //常规上传
+   $ qiniu_upload -c ~/config.json -s ~/directory_need_to_upload -r //上传前清空远程资源
 ```
 
 ### Usage
@@ -32,6 +32,7 @@
     -h, --help            show this help message and exit
     -c  CONFIG, --config=CONFIG set config file path
     -s  SOURCE, --source=SOURCE set local file(directory) path
+    -r, --remove          remove remote files before uploading
     -v, --version         show version number
 ```
 
