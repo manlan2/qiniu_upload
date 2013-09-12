@@ -3,8 +3,8 @@
 import optparse
 from os import path
 from sys import exit
-from lib import __version__
-from lib.upload import Upload
+from qiniuupload import __version__
+from qiniuupload.upload import Upload
 
 def main():
     program = optparse.OptionParser()
