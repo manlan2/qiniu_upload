@@ -17,6 +17,3 @@ class Config():
 
     def get_bucket_name(self):
         return self._get_key('bucket_name')
-
-    def get_domain(self):
-        return self._get_key('domain')
