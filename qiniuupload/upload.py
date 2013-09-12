@@ -8,6 +8,7 @@ import qiniu.rs
 import qiniu.conf
 import qiniu.resumable_io
 from urllib2 import urlopen
+from urllib2 import HTTPError
 from termcolor import colored
 
 class Upload():
@@ -64,15 +65,18 @@ class Upload():
         lock_file_url = qiniu.rs.GetPolicy().make_request(
             qiniu.rs.make_base_url(self.domain, self.lock_file)
         )
-        remote_files = urlopen(lock_file_url).read().split('\n')
-        remove_files = [remote_file for remote_file in remote_files if remote_file not in upload_files]
 
-        for remove_file in remove_files:
-            ret, error = qiniu.rs.Client().delete(self.bucket_name, remote_file)
-            if error is not None:
-                print(colored('Remote file %s deleted failed' % remote_file, 'red'))
-            else:
-                print('Remote file %s deleted successful' % remote_file)
+        try:
+            remote_files = urlopen(lock_file_url).read().split('\n')
+            remove_files = [remote_file for remote_file in remote_files if remote_file not in upload_files]
+            for remove_file in remove_files:
+                ret, error = qiniu.rs.Client().delete(self.bucket_name, remote_file)
+                if error is not None:
+                    print(colored('Remote file %s deleted failed' % remote_file, 'red'))
+                else:
+                    print('Remote file %s deleted successful' % remote_file)
+        except HTTPError:
+            return False
 
     def run(self):
         print(colored('Uploading local files...', 'magenta'))
