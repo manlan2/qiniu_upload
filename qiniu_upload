@@ -15,6 +15,10 @@ def main():
         '--source', '-s', help = 'set local file(directory) path'
     )
     program.add_option(
+        '--remove', '-r', help = 'remove remote files before uploading',
+        action = 'store_true', default = False
+    )
+    program.add_option(
         '--version', '-v', help = 'show version number', action = 'store_true'
     )
 
@@ -35,7 +39,7 @@ def main():
             print('qiniu_upload error: source file(directory) `%s` not found' % options.source)
             exit(2)
 
-        upload = Upload(options.source, options.config)
+        upload = Upload(options.source, options.config, options.remove)
         upload.run()
     else:
         print('Usage: qiniu_upload [options]\n')
