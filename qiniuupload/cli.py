@@ -1,12 +1,11 @@
-#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 import optparse
 from os import path
 from sys import exit
+from upload import Upload
 from qiniuupload import __version__
-from qiniuupload.upload import Upload
 
-def main():
+def run():
     program = optparse.OptionParser()
     program.add_option(
         '--config', '-c', help = 'set config file path'
@@ -45,7 +44,3 @@ def main():
         print('Usage: qiniu_upload [options]\n')
         print('qiniu_upload: error: -%s option requires an argument' % ('c' if options.source else 's'))
         exit(2)
-
-
-if __name__ == '__main__':
-    main()
