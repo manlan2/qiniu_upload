@@ -2,6 +2,11 @@
 
 通过命令行将指定目录下的文件资源上传到 [七牛云存储服务](https://portal.qiniu.com/) 
 
+## 安装
+
+```shell
+  $ pip install qiniu_upload
+```
 
 ## 使用说明
 
