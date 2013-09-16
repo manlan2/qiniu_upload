@@ -20,26 +20,18 @@
 }
 ```
 
-### 例子
+### 上传
 
 ```shell
-   $ qiniu_upload -c ~/config.json -s ~/directory_need_to_upload //常规上传
-   $ qiniu_upload -c ~/config.json -s ~/directory_need_to_upload -r //上传前清空远程资源
+   $ qiniu_upload upload -c ~/config.json -s ~/directory_need_to_upload
 ```
 
-### Usage
+### 删除
+
 ```shell
-  $ qiniu_upload -h
-  
-  Usage: qiniu_upload [options]
-  
-  Options:
-    -h, --help            show this help message and exit
-    -c  CONFIG, --config=CONFIG set config file path
-    -s  SOURCE, --source=SOURCE set local file(directory) path
-    -r, --remove          remove remote files before uploading
-    -v, --version         show version number
+   $ qiniu_upload remove -c ~/config.json -p file_prefix // 如未设置-p属性，则清空当前bucket下所有文件
 ```
+
 
 ## 感谢
 >- [七牛Python-SDK](https://github.com/qiniu/python-sdk)
@@ -47,5 +39,11 @@
 ## License
 >- [MIT](http://www.opensource.org/licenses/MIT)
 
+
+## Release History
+
+_2013-09-16   v0.1.1   （1）支持覆盖已有文件（2）将删除文件的逻辑从上传逻辑中剥离出来_
+
+_2013-09-13   v0.1.0   发布第一版本_
 
 
