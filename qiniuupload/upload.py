@@ -55,11 +55,15 @@ class Upload():
         print(colored('Uploading local files...', 'magenta'))
         upload_files = self._get_upload_files()
         if upload_files:
-            uptoken = qiniu.rs.PutPolicy(self.bucket_name).token()
+
             for upload_file in upload_files:
                 upload_file_key = upload_file.replace(
                     self.config_dir + '/', ''
                 ).replace('/', '_')
+
+                uptoken = qiniu.rs.PutPolicy(
+                    '%s:%s' % (self.bucket_name, upload_file_key)
+                ).token()
 
                 ret, error = qiniu.io.put_file(
                     uptoken, upload_file_key, upload_file
