@@ -1,11 +1,8 @@
 #-*- coding: utf-8 -*-
 import os
-import sys
 import config
-import StringIO
 import qiniu.io
 import qiniu.rs
-import qiniu.rsf
 import qiniu.conf
 from termcolor import colored
 
