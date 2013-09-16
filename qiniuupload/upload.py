@@ -32,9 +32,9 @@ class Upload():
         return None
 
     def run(self):
-        print(colored('Uploading local files...', 'magenta'))
         files = self._get_files()
         if files:
+            print(colored('Uploading local files...', 'magenta'))
             for file_path in files:
                 file_key = file_path.replace(
                     os.environ['HOME'], ''

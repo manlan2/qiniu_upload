@@ -15,8 +15,8 @@ setup(
     license = 'MIT',
     url = 'https://github.com/NanJingBoy/qiniu_upload',
     packages = ['qiniuupload'],
-    platforms = 'any',
-    install_requires= [
+    platforms = 'Linux',
+    install_requires = [
         'qiniu',
         'termcolor'
     ],
