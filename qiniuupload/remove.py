@@ -16,10 +16,16 @@ class Remove():
         qiniu.conf.SECRET_KEY = str(config_instance.get_secret_key())
 
     def _get_files(self):
-        rets, err = qiniu.rsf.Client().list_prefix(
-            self.bucket_name, prefix = self.prefix
-        )
-        return [ret['key'] for ret in rets['items']]
+        rs = qiniu.rsf.Client()
+        files = []
+        marker = None
+        error = None
+        while error is None:
+            ret, error = rs.list_prefix(self.bucket_name, prefix = self.prefix, marker = marker)
+            marker = ret.get('marker', None)
+            files += [item['key'] for item in ret['items'] if item['key'] not in files]
+
+        return files
 
     def run(self):
         files = self._get_files()
