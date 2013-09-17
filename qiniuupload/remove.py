@@ -3,7 +3,7 @@ import config
 import qiniu.rs
 import qiniu.rsf
 import qiniu.conf
-from termcolor import colored
+from qiniuupload import print_color
 
 class Remove():
     def __init__(self, config_path, prefix):
@@ -30,10 +30,10 @@ class Remove():
     def run(self):
         files = self._get_files()
         if files:
-            print(colored('Removing remote files...', 'magenta'))
+            print_color('Removing remote files...', 'magenta')
             for file_key in files:
                 ret, error = qiniu.rs.Client().delete(self.bucket_name, file_key)
                 if error is not None:
-                    print(colored('Remote file %s removed failed' % file_key, 'red'))
+                    print_color('Remote file %s removed failed' % file_key, 'red')
                 else:
                     print('Remote file %s removed successful' % file_key)

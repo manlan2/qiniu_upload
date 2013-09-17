@@ -5,7 +5,7 @@ import qiniu.io
 import qiniu.rs
 import qiniu.conf
 import platform
-from termcolor import colored
+from qiniuupload import print_color
 
 class Upload():
     def __init__(self, path, config_path):
@@ -41,7 +41,7 @@ class Upload():
     def run(self):
         files = self._get_files()
         if files:
-            print(colored('Uploading local files...', 'magenta'))
+            print_color('Uploading local files...', 'magenta')
             for file_path in files:
                 file_key = self._get_file_key(file_path)
                 uptoken = qiniu.rs.PutPolicy(
@@ -51,6 +51,6 @@ class Upload():
                     uptoken, file_key, file_path
                 )
                 if error is not None:
-                    print(colored('File %s uploaded failed' % file_path, 'red'))
+                    print_color('File %s uploaded failed' % file_path, 'red')
                 else:
                     print('File %s uploaded successful' % file_path)
