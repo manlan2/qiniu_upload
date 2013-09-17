@@ -15,14 +15,14 @@ setup(
     license = 'MIT',
     url = 'https://github.com/NanJingBoy/qiniu_upload',
     packages = ['qiniuupload'],
-    platforms = 'Linux',
+    platforms = 'any',
     install_requires = [
         'qiniu',
         'termcolor'
     ],
     entry_points = {"console_scripts": ['qiniu_upload=qiniuupload.cli:run']},
     classifiers = [
-        'Intended Audience :: Developers',
+        'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
