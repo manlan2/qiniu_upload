@@ -4,6 +4,7 @@ import config
 import qiniu.io
 import qiniu.rs
 import qiniu.conf
+import platform
 from termcolor import colored
 
 class Upload():
@@ -26,20 +27,23 @@ class Upload():
         if os.path.isdir(self.path):
             result = []
             for root, dirs, files in os.walk(self.path):
-                result += [root + '/' + file_path for file_path in files]
+                result += [os.path.join(root, file_path) for file_path in files]
             return result
 
         return None
+
+    def _get_file_key(self, file_path):
+        if platform.system().lower() == 'windows':
+            return os.path.normpath(file_path).replace('\\', '_').replace(':', '')
+
+        return file_path.replace('/', '_')[1:]
 
     def run(self):
         files = self._get_files()
         if files:
             print(colored('Uploading local files...', 'magenta'))
             for file_path in files:
-                file_key = file_path.replace(
-                    os.environ['HOME'], ''
-                ).replace('/', '_')[1:]
-
+                file_key = self._get_file_key(file_path)
                 uptoken = qiniu.rs.PutPolicy(
                     '%s:%s' % (self.bucket_name, file_key)
                 ).token()
