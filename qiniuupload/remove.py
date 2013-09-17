@@ -3,7 +3,7 @@ import config
 import qiniu.rs
 import qiniu.rsf
 import qiniu.conf
-from qiniuupload import print_color
+from common import print_color
 
 class Remove():
     def __init__(self, config_path, prefix):

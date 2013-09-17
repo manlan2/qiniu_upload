@@ -5,7 +5,7 @@ import qiniu.io
 import qiniu.rs
 import qiniu.conf
 import platform
-from qiniuupload import print_color
+from common import print_color
 
 class Upload():
     def __init__(self, path, config_path):
